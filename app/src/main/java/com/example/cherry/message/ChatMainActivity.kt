@@ -1,17 +1,21 @@
 package com.example.cherry.message
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cherry.MainActivity
 import com.example.cherry.R
 import com.example.cherry.auth.UserDataModel
 import com.example.cherry.databinding.ActivityChatMainBinding
+import com.example.cherry.setting.MyPageActivity
 import com.example.cherry.utils.FirebaseRef
 import com.google.android.play.integrity.internal.t
 import com.google.firebase.FirebaseException
@@ -80,6 +84,27 @@ class ChatMainActivity : AppCompatActivity() {
             }
             override fun onCancelled(error: DatabaseError) { }
         })
+
+        //mypage option
+        val mypage=findViewById<ImageView>(R.id.my_msg_mypage)
+        mypage.setOnClickListener{
+            val intent_mypage= Intent(this, MyPageActivity::class.java)
+            startActivity(intent_mypage)
+        }
+
+        //mylike btn
+        val mylikeBtn = findViewById<ImageView>(R.id.my_msg_mylikeBtn_mypage)
+        mylikeBtn.setOnClickListener{
+            val intent= Intent(this, MyLikeListActivity::class.java)
+            startActivity(intent)
+        }
+
+        //main option
+        val main=findViewById<ImageView>(R.id.my_msg_main_btn)
+        main.setOnClickListener{
+            val intent_main= Intent(this, MainActivity::class.java)
+            startActivity(intent_main)
+        }
     }
 
     suspend fun getLikeList(userId: String): List<String> {
@@ -119,4 +144,3 @@ class ChatMainActivity : AppCompatActivity() {
         }
     }
 }
-

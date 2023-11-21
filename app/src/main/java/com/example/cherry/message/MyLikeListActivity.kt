@@ -112,7 +112,7 @@ class MyLikeListActivity : AppCompatActivity() {
         //chatting option
         val chatting=findViewById<ImageView>(R.id.my_like_chatting)
         chatting.setOnClickListener{
-            val intent_chatting=Intent(this, MyMsgActivity::class.java)
+            val intent_chatting=Intent(this, ChatMainActivity::class.java)
             startActivity(intent_chatting)
         }
 
