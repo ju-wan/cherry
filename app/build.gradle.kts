@@ -73,4 +73,6 @@ dependencies {
     // coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.3")
+
+    //implementation ("com.android.databinding:dataBinder:1.0-rc4")
 }

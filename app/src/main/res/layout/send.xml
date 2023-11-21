@@ -11,6 +11,7 @@
         android:layout_margin="5dp"
         android:background="@drawable/send_round_corner"
         android:padding="10dp"
+        android:fontFamily="@font/cherry_font"
         android:text="보내는 메시지"
         android:textColor="@android:color/white"
         android:textSize="18sp"

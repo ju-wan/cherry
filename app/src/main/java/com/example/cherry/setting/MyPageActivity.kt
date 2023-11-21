@@ -10,6 +10,7 @@ import com.example.cherry.MainActivity
 import com.example.cherry.R
 import com.example.cherry.auth.IntroActivity
 import com.example.cherry.auth.UserDataModel
+import com.example.cherry.message.ChatMainActivity
 import com.example.cherry.message.MyLikeListActivity
 import com.example.cherry.message.MyMsgActivity
 import com.example.cherry.utils.FirebaseRef
@@ -50,7 +51,7 @@ class MyPageActivity : AppCompatActivity() {
         //chatting option
         val chatting=findViewById<ImageView>(R.id.my_page_chatting)
         chatting.setOnClickListener{
-            val intent_chatting=Intent(this, MyMsgActivity::class.java)
+            val intent_chatting=Intent(this, ChatMainActivity::class.java)
             startActivity(intent_chatting)
         }
 
