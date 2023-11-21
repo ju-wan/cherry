@@ -16,7 +16,6 @@ class UserAdapter(private val context: Context, private val userList: ArrayList<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view: View = LayoutInflater.from(context).
         inflate(R.layout.user_layout, parent, false)
-
         return UserViewHolder(view)
     }
 
@@ -44,7 +43,6 @@ class UserAdapter(private val context: Context, private val userList: ArrayList<
     }
 
     class UserViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-
         val nameText: TextView = itemView.findViewById(R.id.name_text)
     }
 }

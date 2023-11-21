@@ -57,7 +57,6 @@ class ChatActivity : AppCompatActivity() {
 
         // 메시지 전송 버튼
         binding.sendBtn.setOnClickListener {
-
             val message = binding.messageEdit.text.toString()
             val messageObject = Message(message, senderUid)
 

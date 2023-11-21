@@ -32,17 +32,22 @@ import kotlinx.coroutines.tasks.await
 import kotlin.concurrent.thread
 
 class ChatMainActivity : AppCompatActivity() {
+    // settings
     lateinit var binding: ActivityChatMainBinding
     lateinit var adapter: UserAdapter
 
+    // for Firebase
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
 
+    // list of matched users
     private lateinit var userList: ArrayList<UserDataModel>
 
+    // map of matched users
     val nameMap = HashMap<String, String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // initialize
         super.onCreate(savedInstanceState)
         binding = ActivityChatMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,6 +66,7 @@ class ChatMainActivity : AppCompatActivity() {
         binding.userRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.userRecyclerView.adapter = adapter
 
+        // get matched users
         mDbRef.child("userInfo").addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 GlobalScope.launch(Dispatchers.Main) {

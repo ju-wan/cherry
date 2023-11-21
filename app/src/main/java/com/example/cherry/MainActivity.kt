@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent_mypage)
         }
 
-        //chatting option
+        // chatting option
         val chatting=findViewById<ImageView>(R.id.chatting)
         chatting.setOnClickListener{
             val intent_chatting=Intent(this, ChatMainActivity::class.java)

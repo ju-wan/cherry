@@ -9,9 +9,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin="5dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/send_round_corner"
         android:padding="10dp"
         android:text="보내는 메시지"
         android:textColor="@android:color/white"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        />
+
 </RelativeLayout>
