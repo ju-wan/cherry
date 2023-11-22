@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".message.ChatMainActivity">
+    tools:context=".message.ChatMainActivity"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,22 +25,23 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/find"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="608dp"
-        tools:listitem="@layout/user_layout" />
+        tools:listitem="@layout/user_layout"
+        android:layout_weight="1"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="71dp"
+        android:layout_gravity="bottom"
         android:layout_marginTop="44dp"
         android:background="@drawable/toolbar_3"
         android:orientation="horizontal"
-        android:layout_gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -91,4 +92,4 @@
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
-</com.google.android.material.appbar.AppBarLayout>
+</LinearLayout>
