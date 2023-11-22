@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var UserGender : String
     private lateinit var UserLocation : String
 
+    private var location_filter = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -68,6 +69,14 @@ class MainActivity : AppCompatActivity() {
             val intent_chatting=Intent(this, ChatMainActivity::class.java)
             startActivity(intent_chatting)
         }
+
+        if(location_filter == false){
+            val sameLocationBtn=findViewById<ImageView>(R.id.lo_off)
+            sameLocationBtn.setOnClickListener{
+                setFilterSameLocation()
+            }
+        }
+
 
         /*
         //set cardstackview same location

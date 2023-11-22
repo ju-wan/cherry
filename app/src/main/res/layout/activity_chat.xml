@@ -35,12 +35,12 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/send_btn"
             android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="15"
-            android:background="@color/colorAccent"
-            android:text="전송"
+            android:background="@drawable/send_btn"
+
             android:textColor="@android:color/white" />
     </LinearLayout>
 
