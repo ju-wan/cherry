@@ -48,7 +48,7 @@ class ChatMainActivity : AppCompatActivity() {
     private lateinit var userList: ArrayList<UserDataModel>
 
     // map of matched users
-    val nameMap = HashMap<String, String>()
+    val nameMap = HashMap<String, ArrayList<UserDataModel>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // initialize
@@ -81,7 +81,16 @@ class ChatMainActivity : AppCompatActivity() {
                             val likeList = getLikeList(currentUser!!.uid!!)
                             if(isMatched(likeList)) {
                                 userList.add(currentUser!!)
-                                nameMap.put(currentUser!!.name!!, currentUser!!.uid!!)
+
+                                // add entry in map
+                                if(nameMap.containsKey(currentUser!!.name!!)) {
+                                    // 이미 이름이 있으면 리스트에 추가
+                                    nameMap[currentUser!!.name!!]!!.add(currentUser!!)
+                                } else {
+                                    // 새 이름이면 리스트를 만들어 추가
+                                    val temp : ArrayList<UserDataModel> = arrayListOf(currentUser!!)
+                                    nameMap.put(currentUser!!.name!!, temp)
+                                }
                             }
                         }
                     }
@@ -90,6 +99,12 @@ class ChatMainActivity : AppCompatActivity() {
             }
             override fun onCancelled(error: DatabaseError) { }
         })
+
+        //search option
+        val searchBtn = findViewById<ImageView>(R.id.search_button)
+        searchBtn.setOnClickListener{
+            searchUser()
+        }
 
         //mypage option
         val mypage=findViewById<ImageView>(R.id.my_msg_mypage)
@@ -133,20 +148,8 @@ class ChatMainActivity : AppCompatActivity() {
     private fun searchUser() {
         //input
         val searchEditText = findViewById<EditText>(R.id.search_EditText)
-
-        val msgBuilder = AlertDialog.Builder(this)
-            .setPositiveButton("확인") { dialogInterface, i -> }
-        val targetName : String = searchEditText.text.toString()
-
-        if(nameMap.containsKey(targetName)){
-            val getterUid = nameMap[targetName]!!
-
-            msgBuilder.setTitle("검색 성공")
-            msgBuilder.setMessage(targetName + "님을 찾았습니다")
-        }
-        else{
-            msgBuilder.setTitle("검색 오류")
-            msgBuilder.setMessage("이름을 찾을 수 없습니다")
-        }
+        val targetName : String = searchEditText.text.toString().trim()
+        userList.clear()
+        adapter.notifyDataSetChanged()
     }
 }
