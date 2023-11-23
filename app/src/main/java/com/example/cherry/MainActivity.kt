@@ -70,13 +70,22 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent_chatting)
         }
 
-        if(location_filter == false){
-            val sameLocationBtn=findViewById<ImageView>(R.id.lo_off)
-            sameLocationBtn.setOnClickListener{
+        // Location filter button
+        val location:ImageView = findViewById<ImageView>(R.id.location_btn)
+        location.setOnClickListener{
+            if(location_filter==true){
+                location.setImageResource(R.drawable.lo_off)
+                location_filter=false
+                Toast.makeText(this@MainActivity, "이제 전세계 사용자를 받아옵니다!", Toast.LENGTH_SHORT).show()
+                getUserDataList(UserGender)
+            }
+            else{
+                location.setImageResource(R.drawable.lo_on)
+                location_filter=true
+                Toast.makeText(this@MainActivity, "이제 같은 위치의 사용자만 받아옵니다!", Toast.LENGTH_SHORT).show()
                 setFilterSameLocation()
             }
         }
-
 
         /*
         //set cardstackview same location
