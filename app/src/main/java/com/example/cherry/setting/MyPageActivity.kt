@@ -70,7 +70,7 @@ class MyPageActivity : AppCompatActivity() {
             startActivity(intent_main)
         }
 
-        val webviewBtn = findViewById<Button>(R.id.WebView_btn)
+        val webviewBtn = findViewById<ImageView>(R.id.WebView_btn)
         webviewBtn.setOnClickListener {
             val webUrl = "https://api.instagram.com/oauth/authorize?client_id=667500842076858&redirect_uri=https://jeongju10325.wixsite.com/my-site&scope=user_profile,user_media&response_type=code"
             //val webUrl = "https://www.instagram.com/accounts/login/"
