@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
@@ -83,13 +84,13 @@ class ChatMainActivity : AppCompatActivity() {
                                 userList.add(currentUser!!)
 
                                 // add entry in map
-                                if(nameMap.containsKey(currentUser!!.name!!)) {
+                                if(nameMap.containsKey(currentUser!!.name!!.trim())) {
                                     // 이미 이름이 있으면 리스트에 추가
                                     nameMap[currentUser!!.name!!]!!.add(currentUser!!)
                                 } else {
                                     // 새 이름이면 리스트를 만들어 추가
                                     val temp : ArrayList<UserDataModel> = arrayListOf(currentUser!!)
-                                    nameMap.put(currentUser!!.name!!, temp)
+                                    nameMap.put(currentUser!!.name!!.trim(), temp)
                                 }
                             }
                         }
@@ -148,8 +149,15 @@ class ChatMainActivity : AppCompatActivity() {
     private fun searchUser() {
         //input
         val searchEditText = findViewById<EditText>(R.id.search_EditText)
-        val targetName : String = searchEditText.text.toString().trim()
-        userList.clear()
-        adapter.notifyDataSetChanged()
+        val targetName : String = searchEditText.text.toString()
+
+        if(nameMap.containsKey(targetName)) {
+            userList.clear()
+            val searchedUser = nameMap[targetName]
+            for(user in searchedUser!!) {
+                userList.add(user!!)
+            }
+            adapter.notifyDataSetChanged()
+        }
     }
 }
