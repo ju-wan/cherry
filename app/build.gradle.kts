@@ -12,12 +12,13 @@ android {
 
     defaultConfig {
         applicationId = "com.example.cherry"
-        minSdk = 19
+        minSdk = 21
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -78,4 +79,6 @@ dependencies {
 
     // circle image view
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
 }

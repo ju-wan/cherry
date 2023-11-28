@@ -9,6 +9,14 @@
     android:orientation="vertical"
     tools:context=".setting.MyPageActivity">
 
+    <Button
+        android:id="@+id/WebView_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/instagram"/>
+
     <ImageView
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
@@ -33,17 +41,6 @@
         android:layout_width="match_parent"
         android:background="@drawable/profileline"
         android:layout_height="10dp"/>
-
-    <TextView
-        android:id="@+id/authenticationStatusTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:text="인증 완료"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
 
     <ImageView
         android:layout_marginTop="20dp"
@@ -169,23 +166,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".setting.MyPageActivity">
 
-        <Button
-            android:id="@+id/WebView_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#2196F3"
-            android:text="인스타그램 연동"
-            android:textColor="#fff"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-    </LinearLayout>
 
     <!--
     <LinearLayout

@@ -10,12 +10,4 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="start|top"/>
-
-    <Button
-        android:id="@+id/closeWebViewBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="16dp"
-        android:text="인스타 종료" />
 </LinearLayout>
