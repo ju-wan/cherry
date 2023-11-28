@@ -7,5 +7,6 @@ data class UserDataModel (
     val password:String?=null,
     val name:String?=null,
     val location:String?=null,
-    val age:String?=null
+    val age:String?=null,
+    val issuccess : Boolean = false
 )

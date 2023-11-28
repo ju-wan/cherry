@@ -53,6 +53,9 @@
         <activity
             android:name=".message.MyLikeListActivity"
             android:exported="false" />
+        
+        <activity android:name=".setting.WebViewActivity" />
+
     </application>
 
 </manifest>
