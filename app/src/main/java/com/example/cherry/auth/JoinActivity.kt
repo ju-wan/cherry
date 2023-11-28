@@ -262,4 +262,4 @@ class JoinActivity : AppCompatActivity() {
                 // ...
             }
         }
-    }
+}
