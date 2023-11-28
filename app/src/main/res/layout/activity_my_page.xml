@@ -22,6 +22,17 @@
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="30dp"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/WebView_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:text="인스타그램 연동"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/myImage"
         android:layout_margin="20dp"
@@ -176,15 +187,6 @@
         android:orientation="vertical"
         tools:context=".setting.MyPageActivity">
 
-        <Button
-            android:id="@+id/WebView_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#2196F3"
-            android:text="인스타그램 연동"
-            android:textColor="#fff"
-            android:textSize="30dp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <!--
