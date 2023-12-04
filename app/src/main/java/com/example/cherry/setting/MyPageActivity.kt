@@ -3,7 +3,6 @@ package com.example.cherry.setting
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -71,13 +70,15 @@ class MyPageActivity : AppCompatActivity() {
             startActivity(intent_main)
         }
 
-        val webviewBtn = findViewById<Button>(R.id.WebView_btn)
+        val webviewBtn = findViewById<ImageView>(R.id.WebView_btn)
         webviewBtn.setOnClickListener {
-            val webUrl = "https://www.instagram.com/accounts/login/"
+            val webUrl = "https://api.instagram.com/oauth/authorize?client_id=667500842076858&redirect_uri=https://jeongju10325.wixsite.com/my-site&scope=user_profile,user_media&response_type=code"
+            //val webUrl = "https://www.instagram.com/accounts/login/"
             val intent = Intent(applicationContext, WebViewActivity::class.java)
             intent.putExtra("WEB_URL", webUrl)
             startActivity(intent)
         }
+
         getMyData()
     }
 
@@ -109,15 +110,6 @@ class MyPageActivity : AppCompatActivity() {
                     }
 
                 })
-                if (data.issuccess) {
-                    val authenticationStatusTextView = findViewById<TextView>(R.id.authenticationStatusTextView)
-                    authenticationStatusTextView.visibility = View.VISIBLE
-                    val webviewBtn = findViewById<Button>(R.id.WebView_btn)
-                    webviewBtn.visibility = View.GONE
-                } else {
-                    val authenticationStatusTextView = findViewById<TextView>(R.id.authenticationStatusTextView)
-                    authenticationStatusTextView.visibility = View.GONE
-                }
             }
             override fun onCancelled(databaseError: DatabaseError) {
             }
