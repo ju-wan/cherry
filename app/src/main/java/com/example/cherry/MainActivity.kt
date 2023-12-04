@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             override fun onCardSwiped(direction: Direction?) {
+
                 //if give like to other user
                 if(direction==Direction.Right){
                     userLikeOtherUser(uid,usersDataList[userCount].uid.toString())

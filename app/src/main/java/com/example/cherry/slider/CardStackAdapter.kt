@@ -37,6 +37,7 @@ class CardStackAdapter(val context : Context, val items : List<UserDataModel>) :
         val gender=itemView.findViewById<TextView>(R.id.itemGender)
         val city=itemView.findViewById<TextView>(R.id.itemCity)
         val age=itemView.findViewById<TextView>(R.id.itemAge)
+        val checkImageView = itemView.findViewById<ImageView>(R.id.authImageView)
 
         //how to show
         fun binding(data : UserDataModel){
@@ -55,6 +56,12 @@ class CardStackAdapter(val context : Context, val items : List<UserDataModel>) :
             gender.text=data.gender
             city.text=data.location
             age.text=data.age
+
+            if (data.issuccess) {
+                checkImageView.visibility = View.VISIBLE
+            } else {
+                checkImageView.visibility = View.GONE
+            }
         }
     }
 }
