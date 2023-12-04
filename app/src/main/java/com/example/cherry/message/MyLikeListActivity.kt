@@ -1,8 +1,11 @@
 package com.example.cherry.message
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.service.autofill.OnClickAction
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -63,7 +66,7 @@ class MyLikeListActivity : AppCompatActivity() {
 
         */
 
-        //listview longclick
+        //listview click
         userListView.setOnItemClickListener { parent,view,position,id ->
             checkMatching(likeUserList[position].uid.toString())
             getterUid = likeUserList[position].uid.toString()
@@ -122,6 +125,35 @@ class MyLikeListActivity : AppCompatActivity() {
             val intent_main=Intent(this, MainActivity::class.java)
             startActivity(intent_main)
         }
+
+        val sortBtn=findViewById<ImageView>(R.id.sortbtn)
+        sortBtn.setOnClickListener{
+            showSortDialog()
+        }
+    }
+
+    private fun showSortDialog(){
+        val sort_mode = getResources().getStringArray(R.array.sort_mode)
+        val Builder = AlertDialog.Builder(this)
+            .setTitle("정렬형태 결정하기")
+        Builder.setItems(sort_mode){
+            p0, p1 ->
+            if(p1==0){
+                sortbyage()
+            }
+            else if(p1==1){
+                sortbyagedown()
+            }
+            else if(p1==2){
+                sortbyname()
+            }
+            else if(p1==3){
+                sortbynamedown()
+            }
+        }
+
+        val alertDialog:AlertDialog = Builder.create()
+        alertDialog.show()
     }
 
     //sort by name down
