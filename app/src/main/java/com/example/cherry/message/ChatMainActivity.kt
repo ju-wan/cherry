@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -72,34 +73,7 @@ class ChatMainActivity : AppCompatActivity() {
         binding.userRecyclerView.adapter = adapter
 
         // get matched users
-        mDbRef.child("userInfo").addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                GlobalScope.launch(Dispatchers.Main) {
-                    for (postSnapshot in snapshot.children) {
-                        val currentUser = postSnapshot.getValue(UserDataModel::class.java)
-                        if (mAuth.currentUser?.uid != currentUser?.uid) {
-                            // 비동기 작업을 코루틴으로 감싸고, 작업이 완료될 때까지 대기
-                            val likeList = getLikeList(currentUser!!.uid!!)
-                            if(isMatched(likeList)) {
-                                userList.add(currentUser!!)
-
-                                // add entry in map
-                                if(nameMap.containsKey(currentUser!!.name!!.trim())) {
-                                    // 이미 이름이 있으면 리스트에 추가
-                                    nameMap[currentUser!!.name!!]!!.add(currentUser!!)
-                                } else {
-                                    // 새 이름이면 리스트를 만들어 추가
-                                    val temp : ArrayList<UserDataModel> = arrayListOf(currentUser!!)
-                                    nameMap.put(currentUser!!.name!!.trim(), temp)
-                                }
-                            }
-                        }
-                    }
-                    adapter.notifyDataSetChanged()
-                }
-            }
-            override fun onCancelled(error: DatabaseError) { }
-        })
+        getUser()
 
         //search option
         val searchBtn = findViewById<ImageView>(R.id.search_button)
@@ -150,6 +124,14 @@ class ChatMainActivity : AppCompatActivity() {
         //input
         val searchEditText = findViewById<EditText>(R.id.search_EditText)
         val targetName : String = searchEditText.text.toString()
+        val cancel_btn = findViewById<ImageView>(R.id.cancel_button)
+
+        cancel_btn.setOnClickListener {
+            searchEditText.setText("")
+            userList.clear()
+            nameMap.clear()
+            getUser()
+        }
 
         if(nameMap.containsKey(targetName)) {
             userList.clear()
@@ -159,5 +141,36 @@ class ChatMainActivity : AppCompatActivity() {
             }
             adapter.notifyDataSetChanged()
         }
+    }
+
+    private fun getUser() {
+        mDbRef.child("userInfo").addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    for (postSnapshot in snapshot.children) {
+                        val currentUser = postSnapshot.getValue(UserDataModel::class.java)
+                        if (mAuth.currentUser?.uid != currentUser?.uid) {
+                            // 비동기 작업을 코루틴으로 감싸고, 작업이 완료될 때까지 대기
+                            val likeList = getLikeList(currentUser!!.uid!!)
+                            if(isMatched(likeList)) {
+                                userList.add(currentUser!!)
+
+                                // add entry in map
+                                if(nameMap.containsKey(currentUser!!.name!!.trim())) {
+                                    // 이미 이름이 있으면 리스트에 추가
+                                    nameMap[currentUser!!.name!!]!!.add(currentUser!!)
+                                } else {
+                                    // 새 이름이면 리스트를 만들어 추가
+                                    val temp : ArrayList<UserDataModel> = arrayListOf(currentUser!!)
+                                    nameMap.put(currentUser!!.name!!.trim(), temp)
+                                }
+                            }
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }
+            override fun onCancelled(error: DatabaseError) { }
+        })
     }
 }

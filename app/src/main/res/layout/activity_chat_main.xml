@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <EditText
             android:id="@+id/search_EditText"
@@ -21,8 +22,14 @@
             android:hint="이름"/>
 
         <ImageView
+            android:id="@+id/cancel_button"
+            android:background="@drawable/cancel"
+            android:layout_width="21dp"
+            android:layout_height="21dp" />
+
+        <ImageView
             android:id="@+id/search_button"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/find"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
