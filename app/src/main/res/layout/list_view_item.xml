@@ -41,10 +41,18 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
+        android:id="@+id/heart"
         android:layout_width="21dp"
         android:layout_height="26dp"
         android:layout_gravity="end"
-
         android:layout_marginTop="20dp"
         android:src="@drawable/heart" />
+
+    <ImageView
+        android:id="@+id/mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/sendmail"/>
 </LinearLayout>

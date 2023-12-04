@@ -181,6 +181,8 @@ class MyLikeListActivity : AppCompatActivity() {
         listViewAdapter.notifyDataSetChanged()
     }
 
+
+
     private fun checkMatching(otherUid : String){
         val postListener = object : ValueEventListener {
             //dataSnapshot : firebase instore data
