@@ -112,7 +112,7 @@ class MyPageActivity : AppCompatActivity() {
 
                 })
                 if (data.issuccess){
-                    val authStatusTextView = findViewById<TextView>(R.id.authStatusTextView)
+                    val authStatusTextView = findViewById<ImageView>(R.id.authImageView)
                     authStatusTextView.visibility = View.VISIBLE
                 }
             }
