@@ -2,6 +2,7 @@ package com.example.cherry.message
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
@@ -9,10 +10,13 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cherry.MainActivity
 import com.example.cherry.R
 import com.example.cherry.auth.UserDataModel
@@ -105,15 +109,17 @@ class ChatMainActivity : AppCompatActivity() {
 
     suspend fun getLikeList(userId: String): List<String> {
         return mDbRef.child("userLike").child(userId).get().await().children.mapNotNull {
-            it.getValue(String::class.java)
+            it.key.toString()
         }
     }
 
     private fun isMatched(likeList: List<String>): Boolean {
-        // uid가 uid인 사람의 좋아요 목록을 돌다가 접속한 사람의 uid가 있으면 true를 반환
-        for(like in likeList) {
-            Log.v(mAuth.currentUser?.uid, like)
-            if(mAuth.currentUser?.uid != like) {
+        val currentUserUid = mAuth.currentUser?.uid
+        Log.v(currentUserUid, likeList.size.toString())
+
+        for (like in likeList) {
+            Log.v(currentUserUid, like)
+            if (currentUserUid == like) {
                 return true
             }
         }
@@ -154,7 +160,6 @@ class ChatMainActivity : AppCompatActivity() {
                             val likeList = getLikeList(currentUser!!.uid!!)
                             if(isMatched(likeList)) {
                                 userList.add(currentUser!!)
-
                                 // add entry in map
                                 if(nameMap.containsKey(currentUser!!.name!!.trim())) {
                                     // 이미 이름이 있으면 리스트에 추가
