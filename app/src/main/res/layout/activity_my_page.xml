@@ -18,6 +18,14 @@
         android:background="@drawable/logout" />
 
     <ImageView
+        android:id="@+id/WebView_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/instagram" />
+
+    <ImageView
         android:background="@drawable/profile"
         android:layout_width="wrap_content"
         android:layout_marginLeft="30dp"
@@ -35,8 +43,7 @@
             android:id="@+id/myImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
 
         <ImageView
             android:id="@+id/authImageView"
@@ -46,7 +53,7 @@
             android:layout_marginTop="5dp"
             android:elevation="10dp"
             android:src="@drawable/check"
-            android:visibility="visible" />
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <ImageView
@@ -62,21 +69,12 @@
         android:background="@drawable/frofile_about"
         android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:id="@+id/WebView_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop ="10dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/instagram" />
-
 
     <LinearLayout
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/frame_myname"
         android:orientation="horizontal">
 
@@ -136,9 +134,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="71dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/toolbar_3"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
