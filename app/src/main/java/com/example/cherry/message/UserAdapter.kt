@@ -68,7 +68,7 @@ class UserAdapter(private val context: Context, private val userList: ArrayList<
             msgBuilder.setMessage("채팅방을 나가시겠습니까?")
             msgBuilder.setPositiveButton("나가기") { dialog, _ ->
                 // 파이어베이스에서 채팅방 삭제
-                val senderRoom = FirebaseUtils.getUid() + userList[position].uid
+                val senderRoom = userList[position].uid + FirebaseUtils.getUid()
                 val mDbRef = FirebaseDatabase.getInstance().reference
                 Log.v("test", senderRoom)
                 mDbRef.child("chats").child(senderRoom).removeValue()

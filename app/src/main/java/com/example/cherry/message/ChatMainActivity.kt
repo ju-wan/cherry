@@ -23,6 +23,7 @@ import com.example.cherry.auth.UserDataModel
 import com.example.cherry.databinding.ActivityChatMainBinding
 import com.example.cherry.setting.MyPageActivity
 import com.example.cherry.utils.FirebaseRef
+import com.example.cherry.utils.FirebaseRef.Companion.database
 import com.google.android.play.integrity.internal.t
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -30,8 +31,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.snapshot.BooleanNode
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +43,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import kotlin.concurrent.thread
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class ChatMainActivity : AppCompatActivity() {
     // settings
@@ -113,18 +118,7 @@ class ChatMainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isMatched(likeList: List<String>): Boolean {
-        val currentUserUid = mAuth.currentUser?.uid
-        Log.v(currentUserUid, likeList.size.toString())
 
-        for (like in likeList) {
-            Log.v(currentUserUid, like)
-            if (currentUserUid == like) {
-                return true
-            }
-        }
-        return false
-    }
 
     private fun searchUser() {
         //input
@@ -158,7 +152,8 @@ class ChatMainActivity : AppCompatActivity() {
                         if (mAuth.currentUser?.uid != currentUser?.uid) {
                             // 비동기 작업을 코루틴으로 감싸고, 작업이 완료될 때까지 대기
                             val likeList = getLikeList(currentUser!!.uid!!)
-                            if(isMatched(likeList)) {
+                            val isChatExistResult = isChatExist(currentUser?.uid!!)
+                            if(isMatched(likeList) && isChatExistResult) {
                                 userList.add(currentUser!!)
                                 // add entry in map
                                 if(nameMap.containsKey(currentUser!!.name!!.trim())) {
@@ -177,5 +172,26 @@ class ChatMainActivity : AppCompatActivity() {
             }
             override fun onCancelled(error: DatabaseError) { }
         })
+    }
+
+    private fun isMatched(likeList: List<String>): Boolean {
+        val currentUserUid = mAuth.currentUser?.uid
+        for (like in likeList) {
+            if (currentUserUid == like) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private suspend fun isChatExist(uid: String) : Boolean = suspendCoroutine { continuation ->
+        mDbRef.child("chats").child(uid + mAuth.currentUser?.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val result = dataSnapshot.exists()
+                    continuation.resume(result)
+                }
+                override fun onCancelled(databaseError: DatabaseError) { }
+            })
     }
 }
